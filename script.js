@@ -327,6 +327,8 @@ document.querySelector("#current-year").textContent = new Date().getFullYear();
 
 // GoatCounter is loaded only after a site code is added to index.html and never during local previews.
 const goatCounterCode = document.querySelector('meta[name="goatcounter-code"]')?.content.trim();
+const visitCounter = document.querySelector(".visit-counter");
+const visitCount = document.querySelector("#visit-count");
 const isLocalPreview = ["", "localhost", "127.0.0.1"].includes(window.location.hostname);
 if (goatCounterCode && /^[a-z0-9][a-z0-9-]*$/i.test(goatCounterCode) && !isLocalPreview) {
   const goatCounterScript = document.createElement("script");
@@ -334,4 +336,20 @@ if (goatCounterCode && /^[a-z0-9][a-z0-9-]*$/i.test(goatCounterCode) && !isLocal
   goatCounterScript.src = "https://gc.zgo.at/count.js";
   goatCounterScript.dataset.goatcounter = `https://${goatCounterCode}.goatcounter.com/count`;
   document.head.append(goatCounterScript);
+
+  if (visitCount) {
+    fetch(`https://${goatCounterCode}.goatcounter.com/counter/TOTAL.json`)
+      .then((response) => {
+        if (!response.ok) throw new Error("GoatCounter total is unavailable");
+        return response.json();
+      })
+      .then((data) => {
+        if (typeof data.count !== "string" && typeof data.count !== "number") return;
+        visitCount.textContent = String(data.count);
+        visitCounter?.classList.add("is-loaded");
+      })
+      .catch(() => {
+        visitCount.textContent = "—";
+      });
+  }
 }

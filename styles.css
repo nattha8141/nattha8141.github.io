@@ -111,11 +111,45 @@ a,
 
 .brand-text,
 .header-nav,
-.availability {
+.availability,
+.visit-counter {
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  gap: 9px;
+}
+
+.visit-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.visit-counter-label {
+  color: rgba(248, 247, 242, 0.58);
+}
+
+.visit-counter-value {
+  min-width: 1.5ch;
+  color: var(--yellow);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  transition: opacity 180ms ease;
+}
+
+.visit-counter:not(.is-loaded) .visit-counter-value {
+  opacity: 0.58;
 }
 
 .header-nav {
@@ -1383,6 +1417,16 @@ body:has(dialog[open]) {
 
   .availability {
     padding: 10px 12px;
+    font-size: 10px;
+  }
+
+  .header-actions {
+    gap: 6px;
+  }
+
+  .visit-counter {
+    gap: 5px;
+    padding: 10px;
     font-size: 10px;
   }
 

@@ -31,8 +31,8 @@ The audio player intentionally has no autoplay behavior. Playback begins only af
 
 ## Visitor analytics with GoatCounter
 
-The GoatCounter loader is already integrated and stays disabled until a site code is supplied.
+The site uses the `nattha8141` GoatCounter code and displays the total visit count in the header.
 
-1. Create a site at [GoatCounter](https://www.goatcounter.com/).
-2. In `index.html`, set `<meta name="goatcounter-code" content="">` to your GoatCounter code, for example `content="hajid"`.
-3. Deploy the change. Localhost previews are excluded automatically, so they do not inflate the visitor count.
+1. In GoatCounter, open **Settings → Site settings** and enable **Allow adding visitor counts on your website**.
+2. Deploy the site. The header fetches the `TOTAL` count while localhost previews remain excluded from tracking.
+3. GoatCounter caches public counter responses, so new visits may take up to four hours to appear.
